@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    #cont{
+      width: 22%;
+      height: 300px;
+      margin: auto;
+      border: 1px solid black;
+      margin-top: 20px;
+      padding: 10px;
+    }
+    input{
+      display: block;
+      margin-top: 20px;
+      width: 50%;
+      margin-left: 10px;
+
+    }
+    select{
+      margin-top: 20px;
+      width: 50%;
+
+      margin-left: 10px;
+    }
+    #submit{
+      width: 30%;
+      margin-left: 30px;
+      border-radius: 20px;
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="nav">
+    <div><a href="index.html">Home</a></div>
+    <div><a href="applied.html">Applied Job</a></div>
+    <div><a href="bookmark.html">Book Mark</a></div>
+  </div>
+
+    <div id="cont">
+      <h2>Enter Your Apllication Datails</h2>
+<form action="">
+<input  type="text" placeholder="Enter Name" name="" id="name">
+<input type="text" placeholder="Email" name="" id="email">
+<select name="" id="role">
+  <option id="" value="">--Select Job Type--</option>
+  <option value="FSD">FSD</option>
+  <option value="BACKEND">FRONT END</option>
+  <option value="FRONTEND">BACK END</option>
+</select>
+<input type="number" placeholder="Enter expected Salary" name="" id="salary">
+<input  type="submit" name="" id="submit">
+
+</form>
+    </div>
+
+</body>
+</html>
+<script>
+
+  document.querySelector("form").addEventListener("submit",jobSubmit)
+  var jobArr=JSON.parse(localStorage.getItem("jobList"))||[]
+  function jobSubmit(){
+    event.preventDefault()
+   
+    var jobObj={
+      personName:document.querySelector("#name").value,
+      personEmail:document.querySelector("#email").value,
+      personRole:document.querySelector("#role").value,
+      personSalary:document.querySelector("#salary").value,
+    }
+   
+    jobArr.push(jobObj)
+    localStorage.setItem("jobList",JSON.stringify(jobArr))
+
+    window.location.href="applied.html"
+    
+
+  }
+</script>
