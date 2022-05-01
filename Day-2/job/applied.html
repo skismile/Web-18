@@ -23,6 +23,24 @@
         <div><a href="applied.html">Applied Job</a></div>
         <div><a href="bookmark.html">Book Mark</a></div>
       </div>
+      <select name="" id="sortbyname" onChange="handleByName()">
+          <option value="">Sort By Name</option>
+          <option value="ASC">Ascending</option>
+          <option value="DSC">Descending</option>
+      </select>
+
+      <select name="" id="filter"  onChange="handleByfilter()">
+        <option value="">job filter</option>
+        <option value="FSD">FSD</option>
+        <option value="BACKEND">BACKEND</option>
+        <option value="FRONTEND">FRONTEND</option>
+    </select>
+
+    <select name="" id="sortbysalary"  onChange="handleBySalary()">
+        <option value="">Sort By Salary</option>
+        <option value="HTL">High To Low</option>
+        <option value="LTH">Low To High</option>
+    </select>
 
 <div>
     <table>
@@ -51,12 +69,79 @@
     // console.log(jobArr)
 
     displayData(jobArr)
-    var bookMarkArr=JSON.parse(localStorage.getItem("bookmarks"))||[]
+function handleByName()
+{
+    var selected=document.querySelector("#sortbyname").value;
+    // console.log(selected)
+    if(selected=="ASC")
+    {
+      jobArr.sort(function(a,b){
+          var x=a.personName.toUpperCase()
+          var y=b.personName.toUpperCase()
+      if(x>y){
+          return 1
+      }
+      if(x<y){
+          return -1
+      }
+      return 0
+       
+    }) 
+    displayData(jobArr)
+}
+if(selected=="DSC")
+    {
+      jobArr.sort(function(a,b){
+          var x=a.personName.toUpperCase()
+          var y=b.personName.toUpperCase()
+      if(x>y){
+          return -1
+      }
+      if(x<y){
+          return 1
+      }
+      return 0
+       
+    }) 
+    displayData(jobArr)
+}
+    
+}
+function handleBySalary(){
+    var selected=document.querySelector("#sortbysalary").value
+console.log(selected)
+    if(selected=="LTH")
+    {
+        jobArr.sort(function(a,b){
+           return a.personSalary-b.personSalary
+        })
+        displayData(jobArr)
+    }
+    if(selected=="HTL")
+    {
+        jobArr.sort(function(a,b){
+           return b.personSalary-a.personSalary
+        })
+        displayData(jobArr)
+    }
+}
+
+
+function handleByfilter(){
+    var selected=document.querySelector("#filter").value
+    // console.log(selected)
+    var filter= jobArr.filter(function(ele){
+        return ele.personRole==selected
+    })
+    displayData(filter)
+}   
+
+var bookMarkArr=JSON.parse(localStorage.getItem("bookmarks"))||[]
     console.log(bookMarkArr)
 
     function displayData(data)
     {
-
+        document.querySelector("tbody").innerHTML=""
         data.forEach(function(elem){
             var tr=document.createElement("tr")
             var td1=document.createElement("td")
