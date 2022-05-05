@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sing Up</title>
+    <style>
+        #cont{
+            width: 100%;
+            /* border: 1px solid blue; */
+            height: 800px;
+        }
+        #logo{
+            width: 100%;
+            height: 100px;
+            /* border: 1px solid green; */
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+        #singup{
+            width: 35%;
+            height: 600px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            margin:auto;
+           text-align: center;
+        }
+        input{
+            width: 70%;
+            height: 30px;
+            margin-bottom: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="cont">
+        <div id="logo"> <img src="https://sso.masaischool.com/brand_dark.svg" alt=""></div>
+        <div id="singup">
+            <h1>Sing Up</h1>
+            <form action="">
+                Full name <br> <br>
+                <input type="text" placeholder="Enter your full name" id="name"> <br>
+                Email <br> <br>
+                <input type="email" name="" placeholder="Enter email" id="email"><br>
+                Password <br> <br>
+                <input type="password" id="password" placeholder="Enter Password">
+
+                <input type="submit" value="SING UP">
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+document.querySelector("form").addEventListener("submit",singupFun)
+userData=JSON.parse(localStorage.getItem("singup")) || []
+console.log(userData)
+
+function singupFun(){
+event.preventDefault()
+
+var name=document.querySelector("#name").value
+var email=document.querySelector("#email").value
+var password=document.querySelector("#password").value
+
+if(name=="" || email=="" || password=="")
+{
+ alert("please give input correctly")
+}
+
+else{
+userDataObj={
+    name: name,
+    email:email,
+    password:password,
+}
+userData.push(userDataObj)
+localStorage.setItem("singup",JSON.stringify(userData))
+// alert("Sing Up successfully")
+
+}
+window.location.reload()
+window.location.href="login.html"
+}
+console.log
+
+</script>
